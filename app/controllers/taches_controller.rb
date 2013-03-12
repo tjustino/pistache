@@ -6,8 +6,8 @@ class TachesController < ApplicationController
   def index
     # @taches = Tache.all
     t = Tache.arel_table
-    @taches_ouvertes = Tache.where( (t[:date_fin].eq(nil)).or(t[:date_fin].eq("")) )
-    @taches_fermees = Tache.where( t[:date_fin].not_eq("") )
+    @taches_ouvertes = Tache.where( (t[:date_fin].eq(nil)).or(t[:date_fin].eq(nil)) )
+    @taches_fermees = Tache.where( t[:date_fin].not_eq(nil) )
 
     respond_to do |format|
       format.html # index.html.erb

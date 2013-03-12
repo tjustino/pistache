@@ -6,8 +6,8 @@ class ProjetsController < ApplicationController
   def index
     # @projets = Projet.all
     t = Projet.arel_table
-    @projets_ouverts = Projet.where( (t[:date_fin].eq(nil)).or(t[:date_fin].eq("")) )
-    @projets_fermes = Projet.where( t[:date_fin].not_eq("") )
+    @projets_ouverts = Projet.where( (t[:date_fin].eq(nil)).or(t[:date_fin].eq(nil)) )
+    @projets_fermes = Projet.where( t[:date_fin].not_eq(nil) )
 
     respond_to do |format|
       format.html # index.html.erb
