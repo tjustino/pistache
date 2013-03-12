@@ -1,0 +1,56 @@
+<div class="tabbable tabs-left">
+    <ul class="nav nav-tabs">
+    <% @infos.each_with_index do |info, i| %>
+        <li<% if i == 0 %> class="active"<% end %>><a href="#l<%= info.id %>" data-toggle="tab"><%= info.nom %></a></li>
+    <% end %>
+    </ul>
+
+    <div class="tab-content">
+	<% @infos.each_with_index do |info, i| %>
+      <div class="tab-pane<% if i == 0 %>  active<% end %>" id="l<%= info.id %>">
+        <h6 class="page-header">
+			Responsable : <%= info.responsable.nom %>
+			<% if info.url_info != "" %>
+				<%= link_to(info.url_info, {:target => "_blank", :style => "float: right;"}) do %><i class="icon-info-sign"></i><% end %>
+			<% end %>
+			<% if info.url_info != "" and info.url_doc != "" %><span style="float: right;">&nbsp;&nbsp;/&nbsp;&nbsp;</span><% end %>
+			<% if info.url_doc != "" %>
+				<%= link_to(info.url_doc, {:target => "_blank", :style => "float: right;"}) do %><i class="icon-book"></i><% end %>
+			<% end %>
+		</h6>
+
+        <p class="label label-info">Tâches</p>
+	    	<table class="table table-striped table-condensed">
+	    		<thead>
+	    			<tr>
+	    				<th></th>
+	    				<th>Nom</th>
+	    				<th>Date de début</th>
+	    				<th>Date de fin</th>
+	    				<th>Charge</th>
+	    				<th>Action</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+				<% if info.taches.count != 0 %>
+					<% info.taches.each do |tache| %>
+	    			<tr>
+	    				<td><%= link_to(edit_tache_path(tache)) do %><i class="icon-pencil"></i><% end %></td>
+	    				<td><%= tache.nom %></td>
+	    				<td><%= I18n.l(tache.date_debut) %></td>
+	    				<td><%= tache.date_fin %></td>
+<td><%= select("tache", "charge", [["N/A", 0], ["0,25 j/h", 0.25], ["0,50 j/h", 0.5], ["0,75 j/h", 0.75], ["1,00 j/h", 1], ["1,25 j/h", 1.25], ["1,50 j/h", 1.5], ["1,75 j/h", 1.75], ["2,00 j/h", 2], ["2,25 j/h", 2.25], ["2,50 j/h", 2.5], ["2,75 j/h", 2.75], ["3,00 j/h", 3], ["3,25 j/h", 3.25], ["3,50 j/h", 3.5], ["3,75 j/h", 3.75], ["4,00 j/h", 4], ["4,25 j/h", 4.25], ["4,50 j/h", 4.5], ["4,75 j/h", 4.75], ["5,00 j/h", 5], ["5,25 j/h", 5.25], ["5,50 j/h", 5.5], ["5,75 j/h", 5.75], ["6,00 j/h", 6], ["6,25 j/h", 6.25], ["6,50 j/h", 6.5], ["6,75 j/h", 6.75], ["7,00 j/h", 7], ["7,25 j/h", 7.25], ["7,50 j/h", 7.5], ["7,75 j/h", 7.75], ["8,00 j/h", 8], ["8,25 j/h", 8.25], ["8,50 j/h", 8.5], ["8,75 j/h", 8.75], ["9,00 j/h", 9], ["9,25 j/h", 9.25], ["9,50 j/h", 9.5], ["9,75 j/h", 9.75]]) %></td>
+	    				<td><button class="btn" type="submit">Fait !</button></td>
+	    			</tr>
+					<% end %>
+				<% else %>
+					<tr><td></td><td class="muted">Aucune tâche</td><td></td><td></td><td></td><td></td></tr>
+				<% end %>
+	    		</tbody>
+	    	</table>
+		<br />
+
+      </div>
+    <% end %>
+    </div>
+</div>

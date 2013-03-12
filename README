@@ -1,0 +1,59 @@
+Le développeur étend un piètre webdesigner, Pistache utilise massivement Bootstrap !
+Pour économiser la bande passante, il est conseillé de personnaliser tout ça :
+
+http://twitter.github.com/bootstrap/customize.html
+
+1. Choose components (à faire !!)
+  Scaffolding
+    Normalize and reset
+    Body type and links
+    Grid system
+    Layouts
+  Base CSS
+    Headings, body, etc
+    Code and pre
+    Labels and badges
+    Tables
+    Forms
+    Buttons
+    Icons
+  Components
+    Button groups and dropdowns
+    Navs, tabs, and pills
+    Navbar
+    Breadcrumbs
+    Pagination
+    Pager
+    Thumbnails
+    Alerts
+    Progress bars
+    Hero unit
+  JS Components
+    Tooltips
+    Popovers
+    Modals
+    Dropdowns
+    Collapse
+    Carousel
+  Miscellaneous
+    Wells
+    Close icon
+    Utilities
+    Component animations
+  Responsive
+    Visible/hidden classes
+    Narrow tablets and below (<767px)
+    Tablets to desktops (767-979px)
+    Large desktops (>1200px)
+    Responsive navbar
+
+2. Select jQuery plugins
+  Transitions (required for any animation)
+  Dropdowns
+  Togglable tabs
+
+3. Customize variables
+  @iconSpritePath -> 'glyphicons-halflings.png'
+
+
+Une fois dézippé, les images vont dans app/assets/images, le javascript dans app/assets/javascripts et le CSS dans stylesheets.

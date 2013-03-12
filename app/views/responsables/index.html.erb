@@ -1,0 +1,34 @@
+<div class="nouveau">
+<%= link_to(new_responsable_path, :class => "btn") do %>
+  <i class="icon-edit"></i> Nouveau responsable
+<% end %>
+</div>
+
+<br>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+
+	<tbody>
+<% @responsables.each do |responsable| %>
+		<tr>
+          <% if responsable.invalide == true %>
+    		<td class="muted"><%= responsable.nom %></td>
+          <% else %>
+    		<td><%= responsable.nom %></td>
+          <% end %>
+    		<td>
+				<%= link_to(edit_responsable_path(responsable)) do %><i class="icon-pencil"></i><% end %>
+				<%= link_to(responsable, :data => { :confirm => "Cela supprimera définitivement l'entrée !\nÊtes-vous sûr ?" }, :method => :delete) do %><i class="icon-trash"></i><% end %>
+			</td>
+		</tr>
+<% end %>
+	</tbody>
+</table>
+
+<div class="span1 offset10 label label-info" style="text-align:center">Total : <%= @responsables.count %></div>

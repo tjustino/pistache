@@ -1,0 +1,92 @@
+<div class="nouveau">
+<%= link_to(new_tache_path, :class => "btn") do %>
+  <i class="icon-edit"></i> Nouvelle tâche
+<% end %>
+</div>
+
+<br>
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#ouv" data-toggle="tab">Tâches ouvertes</a></li>
+		<li><a href="#ferm" data-toggle="tab">Tâches fermées</a></li>
+	</ul>
+	
+	<div class="tab-content">
+		<div class="tab-pane active" id="ouv">
+			<!-- Tâches ouvertes -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Projet</th>
+						<th>Responsable</th>
+						<th>Date de début</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+		<% if @taches_ouvertes.count != 0 %>
+			<% @taches_ouvertes.each do |tache| %>
+					<tr>
+						<td><%= tache.nom %></td>
+						<td><%= tache.projet.nom %></td>
+						<td><%= tache.projet.responsable.nom %></td>
+						<td><%= I18n.l(tache.date_debut) %></td>
+				    	<td>
+							<%= link_to(edit_tache_path(tache)) do %><i class="icon-pencil"></i><% end %>
+							<%= link_to(tache, :data => { :confirm => "Cela supprimera définitivement l'entrée !\nÊtes-vous sûr ?" }, :method => :delete) do %><i class="icon-trash"></i><% end %>
+						</td>
+					</tr>
+			<% end %>
+		<% else %>
+					<tr><td class="muted">Aucune tâche</td><td></td><td></td><td></td></tr>
+		<% end %>
+				</tbody>
+			</table>
+
+			<div class="span1 offset10 label label-info" style="text-align:center">Total : <%= @taches_ouvertes.count %></div>
+		</div>
+
+		<div class="tab-pane" id="ferm">
+			<!-- Tâches fermées -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Projet</th>
+						<th>Responsable</th>
+						<th>Date de début</th>
+						<th>Date de fin</th>
+						<th>Charge</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+		<% if @taches_fermees.count != 0 %>
+			<% @taches_fermees.each do |tache| %>
+					<tr>
+						<td><%= tache.nom %></td>
+						<td><%= tache.projet.nom %></td>
+						<td><%= tache.projet.responsable.nom %></td>
+						<td><%= I18n.l(tache.date_debut) %></td>
+						<td><%= I18n.l(tache.date_fin) %></td>
+						<td><% if tache.charge != BigDecimal(0) %><%= tache.charge %> j/h<% else %>N/A<% end %></td>
+				    	<td>
+							<%= link_to(edit_tache_path(tache)) do %><i class="icon-pencil"></i><% end %>
+							<%= link_to(tache, :data => { :confirm => "Cela supprimera définitivement l'entrée !\nÊtes-vous sûr ?" }, :method => :delete) do %><i class="icon-trash"></i><% end %>
+						</td>
+					</tr>
+			<% end %>
+		<% else %>
+					<tr><td class="muted">Aucune tâche</td><td></td><td></td><td></td><td></td><td></td></tr>
+		<% end %>
+				</tbody>
+			</table>
+
+			<div class="span1 offset10 label label-info" style="text-align:center">Total : <%= @taches_fermees.count %></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,59 @@
+<%= form_for(@tache, :html => { :class => "form-horizontal" }) do |f| %>
+<fieldset>
+  <% if @tache.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@tache.errors.count, "erreur") %> ont été identifiées :</h2>
+
+      <ul>
+      <% @tache.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label(:nom, :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:nom, :class => "input-xlarge") %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:projet, :class => "control-label") %>
+    <div class="controls">
+      <%= f.select(:projet_id, options_from_collection_for_select(Projet.where("pause = 'f'").order("nom"), :id, :nom, @tache.projet_id)) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label("Date de début", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:date_debut, :class => "datepicker") %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label("Date de fin", :class => "control-label") %>
+    <div class="controls">
+      <%= f.text_field(:date_fin, :class => "datepicker") %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:charge, :class => "control-label") %>
+    <div class="controls">
+      <%= f.select(:charge, [["N/A", 0], ["0,25 j/h", 0.25], ["0,50 j/h", 0.5], ["0,75 j/h", 0.75], ["1,00 j/h", 1], ["1,25 j/h", 1.25], ["1,50 j/h", 1.5], ["1,75 j/h", 1.75], ["2,00 j/h", 2], ["2,25 j/h", 2.25], ["2,50 j/h", 2.5], ["2,75 j/h", 2.75], ["3,00 j/h", 3], ["3,25 j/h", 3.25], ["3,50 j/h", 3.5], ["3,75 j/h", 3.75], ["4,00 j/h", 4], ["4,25 j/h", 4.25], ["4,50 j/h", 4.5], ["4,75 j/h", 4.75], ["5,00 j/h", 5], ["5,25 j/h", 5.25], ["5,50 j/h", 5.5], ["5,75 j/h", 5.75], ["6,00 j/h", 6], ["6,25 j/h", 6.25], ["6,50 j/h", 6.5], ["6,75 j/h", 6.75], ["7,00 j/h", 7], ["7,25 j/h", 7.25], ["7,50 j/h", 7.5], ["7,75 j/h", 7.75], ["8,00 j/h", 8], ["8,25 j/h", 8.25], ["8,50 j/h", 8.5], ["8,75 j/h", 8.75], ["9,00 j/h", 9], ["9,25 j/h", 9.25], ["9,50 j/h", 9.5], ["9,75 j/h", 9.75]]) %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <% if current_page?(:action => "new") %>
+      <%= f.submit("Créer la tâche", :class => "btn btn-primary") %>
+	<% else %>
+      <%= f.submit("Mettre à jour la tâche", :class => "btn btn-primary") %>
+	<% end %>
+    <%= link_to("Retour", taches_path, :class => "btn") %>
+  </div>
+</fieldset>
+<% end %>

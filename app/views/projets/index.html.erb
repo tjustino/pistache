@@ -1,0 +1,87 @@
+<div class="nouveau">
+<%= link_to(new_projet_path, :class => "btn") do %>
+  <i class="icon-edit"></i> Nouveau projet
+<% end %>
+</div>
+
+<br>
+
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#ouv" data-toggle="tab">Projets ouverts</a></li>
+		<li><a href="#ferm" data-toggle="tab">Projets fermés</a></li>
+	</ul>
+	
+	<div class="tab-content">
+		<div class="tab-pane active" id="ouv">
+			<!-- Projets ouverts -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Responsable</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+		<% if @projets_ouverts.count != 0 %>
+			<% @projets_ouverts.each do |projet| %>
+					<tr>
+			          <% if projet.pause == true %>
+			            <td class="muted"><%= projet.nom %></td>
+			            <td class="muted"><%= projet.responsable.nom %></td>
+			          <% else %>
+			            <td><%= projet.nom %></td>
+			            <td><%= projet.responsable.nom %></td>
+			          <% end %>
+						<td>
+							<%= link_to(edit_projet_path(projet)) do %><i class="icon-pencil"></i><% end %>
+							<%= link_to(projet, :data => { :confirm => "Cela supprimera définitivement l'entrée !\nÊtes-vous sûr ?" }, :method => :delete) do %><i class="icon-trash"></i><% end %>
+						</td>
+			  		</tr>
+			<% end %>
+		<% else %>
+					<tr><td class="muted">Aucun Projet</td><td></td><td></td><td></td></tr>
+		<% end %>
+				</tbody>
+			</table>
+
+			<div class="span1 offset10 label label-info" style="text-align:center">Total : <%= @projets_ouverts.count %></div>
+		</div>
+	
+		<div class="tab-pane" id="ferm">
+			<!-- Projets fermés -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Responsable</th>
+						<th>Date de fin</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+		<% if @projets_fermes.count != 0 %>
+			<% @projets_fermes.each do |projet| %>
+					<tr>
+						<td><%= projet.nom %></td>
+			            <td><%= projet.responsable.nom %></td>
+						<td><%= I18n.l(projet.date_fin) %></td>
+						<td>
+							<%= link_to(edit_projet_path(projet)) do %><i class="icon-pencil"></i><% end %>
+							<%= link_to(projet, :data => { :confirm => "Cela supprimera définitivement l'entrée !\nÊtes-vous sûr ?" }, :method => :delete) do %><i class="icon-trash"></i><% end %>
+						</td>
+			  		</tr>
+			<% end %>
+		<% else %>
+					<tr><td class="muted">Aucun Projet</td><td></td><td></td><td></td></tr>
+		<% end %>
+				</tbody>
+			</table>
+
+			<div class="span1 offset10 label label-info" style="text-align:center">Total : <%= @projets_fermes.count %></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,14 @@
+<p class="alert alert-success"><%= notice %></p>
+
+<p>
+  <b>Nom : </b>
+  <%= @responsable.nom %>
+</p>
+
+<p>
+  <b>Invalide : </b>
+  <%= @responsable.invalide %>
+</p>
+
+<%= link_to("Éditer", edit_responsable_path(@responsable), :class => "btn btn-primary") %>
+<%= link_to("Retour", responsables_path, :class => "btn") %>

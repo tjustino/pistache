@@ -1,0 +1,19 @@
+<p class="alert alert-success"><%= notice %></p>
+
+<p>
+  <b>Nom : </b>
+  <%= @projet.nom %>
+</p>
+
+<p>
+  <b>Responsable : </b>
+  <%= @projet.responsable.nom %>
+</p>
+
+<p>
+  <b>Pause : </b>
+  <%= @projet.pause %>
+</p>
+
+<%= link_to("Éditer", edit_projet_path(@projet), :class => "btn btn-primary") %>
+<%= link_to("Retour", projets_path, :class => "btn") %>

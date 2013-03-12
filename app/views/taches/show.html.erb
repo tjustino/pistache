@@ -1,0 +1,14 @@
+<p class="alert alert-success"><%= notice %></p>
+
+<p>
+  <b>Nom : </b>
+  <%= @tache.nom %>
+</p>
+
+<p>
+  <b>Projet : </b>
+  <%= @tache.projet.nom %>
+</p>
+
+<%= link_to("Éditer", edit_tache_path(@tache), :class => "btn btn-primary") %>
+<%= link_to("Retour", taches_path, :class => "btn") %>

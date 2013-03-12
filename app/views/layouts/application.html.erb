@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pistache</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div class="container">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-inner">
+				<%= link_to("Pistache", root_path, :class => "brand") %>
+				<ul class="nav">
+					<li><%= link_to("Nouvelle tâche", new_tache_path) %></li>
+				</ul>
+				
+				<form class="navbar-search pull-left" action="">
+					<input type="text" class="search-query span2" placeholder="Recherche (KO)">
+				</form>
+				
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><%= link_to("Responsables", responsables_path) %></li>
+							<li><%= link_to("Projets", projets_path) %></li>
+							<li><%= link_to("Tâches", taches_path) %></li>
+							<li class="divider"></li>
+							<li><%= link_to("Activité #{I18n.l(Time.now.months_ago(1), :format => "%B %Y")} (KO)", root_path) %></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+<%= yield %>
+	</div>
+
+</body>
+</html>
