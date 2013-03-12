@@ -34,3 +34,7 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+group :production do
+  gem 'activerecord-postgresql-adapter'
+end
